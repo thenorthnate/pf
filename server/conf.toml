@@ -1,0 +1,23 @@
+# TOML configuration file for Vault Server
+# Nathan North
+
+title = "Vault Configuration File"
+
+actions = [
+  "login",
+  "transaction",
+  "user",
+  "account",
+]
+
+action_types = [
+  "create",
+  "get",
+  "update",
+  "delete",
+]
+
+[api]
+  [api.create]
+    [api.create.transaction]
+    type = "POST"
