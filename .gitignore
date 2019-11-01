@@ -1,4 +1,12 @@
+# Mac Files
 *.DS_Store
+
+# Python Files
 *.pyc
+
+# Standard Files
 *.txt
+
+# Specific Files
 gibbon/*
+Vault
