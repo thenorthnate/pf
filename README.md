@@ -1,6 +1,6 @@
 # Vault
 
-## Using Vault
+## Using Vault (cli)
 `./Vault -auth login`
 `./Vault -auth logout`
 
@@ -10,7 +10,6 @@
 `./Vault -new t`
 
 
-
-### Things to consider
-1. Use cookies to manage the login
-2. Manage the login on the server - just don't send data if the user hasn't authenticated
+## Thoughts/Notes
+- PR = Personal Revenue... this can be calculated based on a window size (date 1 -> date 2), and cadence (per week/month/year)
+- PI = Personal Income... this is of course revenue minus expenses... essentially how much are you saving each month?
