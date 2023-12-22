@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"math"
 	"strconv"
 
@@ -26,7 +27,8 @@ func invest(cmd *cobra.Command, args []string) {
 		}
 		for fund, percentage := range config.Investments.Blend {
 			investAmount := math.Round(amount * percentage)
-			pterm.FgLightBlue.Printfln("%v: $%.2f", fund, investAmount)
+			amountStr := pterm.FgLightBlue.Sprintf("$%.2f", investAmount)
+			fmt.Printf("%-8s%v\n", fund+":", amountStr)
 		}
 	}
 }
