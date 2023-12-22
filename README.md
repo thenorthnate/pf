@@ -1,4 +1,6 @@
-# Vault
+# pf
+
+`pf` is a simple command line tool to manage your personal finances.
 
 ## Using Vault (cli)
 `./Vault -auth login`
