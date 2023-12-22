@@ -1,17 +1,25 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
-
-	"github.com/pterm/pterm"
+	"path/filepath"
 )
 
-func Fatal(message string) {
-	pterm.FgLightRed.Println(message)
-	os.Exit(1)
+func Fatalf(message string, args ...any) {
+	panic(fmt.Sprintf(message, args...))
 }
 
-func Fatalf(message string, args ...any) {
-	pterm.FgLightRed.Printfln(message, args...)
-	os.Exit(1)
+func getDataPath() (string, error) {
+	if dataDir != "" {
+		if _, err := os.Lstat(dataDir); err != nil {
+			return "", err
+		}
+		return dataDir, nil
+	}
+	homedir, err := os.UserHomeDir()
+	if err != nil {
+		return "", err
+	}
+	return filepath.Join(homedir, ".pf"), nil
 }

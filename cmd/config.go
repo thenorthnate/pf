@@ -8,34 +8,42 @@ import (
 )
 
 func initConfig() {
-	configDir, err := getConfigPath()
+	dataDir, err := getDataPath()
 	if err != nil {
 		Fatalf("failed to find configuration path: %v", err)
 	}
-	data, err := os.ReadFile(configDir)
+	configData, err := os.ReadFile(filepath.Join(dataDir, "config.toml"))
 	if err != nil {
 		Fatalf("failed to read configuration file: %v", err)
 	}
-	if err = toml.Unmarshal(data, config); err != nil {
+	if err = toml.Unmarshal(configData, config); err != nil {
 		Fatalf("failed to parse configuration file: %v", err)
 	}
-}
-
-func getConfigPath() (string, error) {
-	if configPath != "" {
-		return configPath, nil
-	}
-	homedir, err := os.UserHomeDir()
+	accountsData, err := os.ReadFile(filepath.Join(dataDir, "accounts.toml"))
 	if err != nil {
-		return "", err
+		Fatalf("failed to read accounts file: %v", err)
 	}
-	return filepath.Join(homedir, ".pf", "config.toml"), nil
+	if err = toml.Unmarshal(accountsData, accounts); err != nil {
+		Fatalf("failed to parse accounts file: %v", err)
+	}
 }
 
 type Config struct {
-	Investments Invest `toml:"invest"`
+	Categories  []string `toml:"categories"`
+	Investments Invest   `toml:"invest"`
 }
 
 type Invest struct {
 	Blend map[string]float64 `toml:"blend"`
+}
+
+type AccountFile struct {
+	Accounts []Account `toml:"account"`
+}
+
+type Account struct {
+	Name    string  `toml:"name"`
+	Owner   string  `toml:"owner"`
+	ID      string  `toml:"id"`
+	Balance float64 `toml:"balance"`
 }

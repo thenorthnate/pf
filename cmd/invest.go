@@ -12,7 +12,7 @@ import (
 func makeInvestCommand() *cobra.Command {
 	investCmd := &cobra.Command{
 		Use:   "invest",
-		Short: "",
+		Short: "evaulate investments",
 		Long:  `TBD`,
 		Run:   invest,
 	}
