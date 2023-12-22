@@ -12,18 +12,26 @@ var (
 		Short: "pf is a simple command line tool to manage your personal finances",
 		Long:  `TBD`,
 	}
-	verbose = false
+	verbose    = false
+	configPath = ""
+	config     = &Config{}
 )
 
 func init() {
-	// cobra.OnInitialize(initConfig)
+	cobra.OnInitialize(initConfig)
 	rootCmd.PersistentFlags().BoolVar(&verbose, "verbose", false, "Set the verbosity of logs (default is not verbose)")
+	rootCmd.PersistentFlags().StringVar(&configPath, "config", "", "Specify the path to the config file")
+	registerCommands()
 }
-
-func initConfig() {}
 
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)
 	}
+}
+
+func registerCommands() {
+	rootCmd.AddCommand(
+		makeInvestCommand(),
+	)
 }
